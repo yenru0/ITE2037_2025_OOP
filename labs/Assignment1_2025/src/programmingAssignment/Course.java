@@ -1,7 +1,5 @@
 package programmingAssignment;
 
-import java.text.MessageFormat;
-
 public class Course {
     public String name;
     public String professor;
@@ -16,7 +14,6 @@ public class Course {
         name = "";
         professor = "";
         roomNumber = "";
-        isValid = true;
     }
 
     public Course(String name, String tutor, String room) {
@@ -65,6 +62,6 @@ public class Course {
 
     public String getDetails() {
         //•	Create a getDetails() method that returns the course name, professor, and roomNumber as String
-        return String.format("Name : %s\nTutor : %s\nRoom : %s\n", name, professor, roomNumber);
+        return String.format("Name : %s\nTutor : %s\nRoom : %s", name, professor, roomNumber);
     }
 }

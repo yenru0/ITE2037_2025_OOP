@@ -1,6 +1,5 @@
 package programmingAssignment;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -48,7 +47,7 @@ public class HYTimeTable {
     public String getSchedule(String day, int period) {
         //•	Create a method called getSchedule(). This method receives DAY and period as arguments,
         // stores the information about the subject in that time period in a String, and returns it.
-        if(period < 9 || period > 19) {
+        if (period < 9 || period > 19) {
             return null;
         }
         return "At that time you have :\n" + timeTable[period - 9][DAYS.valueOf(day).ordinal()].getDetails();
@@ -123,7 +122,7 @@ public class HYTimeTable {
         // period, tutor information as follows
         Course target = null;
 
-        if (sub == Course.CLASS_LUNCH || sub == Course.CLASS_DINNER) {
+        if (sub.equals(Course.CLASS_LUNCH) || sub.equals(Course.CLASS_DINNER)) {
             return "Having a Lunch or Dinner";
         } else if (sub.equals(Course.CLASS_BLANK)) {
             return "Blank Class";
@@ -160,18 +159,17 @@ public class HYTimeTable {
             return null;
         }
 
-        Calendar cal = Calendar.getInstance();
         int year, month, day;
         try {
             year = Integer.parseInt(s.substring(0, 4));
-            month = Integer.parseInt(s.substring(4, 5));
-            day = Integer.parseInt(s.substring(6, 7));
+            month = Integer.parseInt(s.substring(4, 6));
+            day = Integer.parseInt(s.substring(6, 8));
         } catch (NumberFormatException e) {
             return null;
         }
-
+        Calendar cal = Calendar.getInstance();
         cal.set(year,
-                month,
+                month - 1,
                 day);
 
         return cal;

@@ -1,6 +1,5 @@
 package programmingAssignment;
 
-import java.nio.file.DirectoryStream;
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -12,10 +11,7 @@ public class HYTimeTableApp {
 
         Predicate<String> isWeekend = (String day) -> {
             var k = weeksList.indexOf(day);
-            if (k == 0 || k == 6) {
-                return true;
-            }
-            return false;
+            return k == 0 || k == 6;
         };
 
         Calendar cal = Calendar.getInstance();
@@ -25,13 +21,19 @@ public class HYTimeTableApp {
         String name, day, tutorName, roomName, sub;
         boolean when = true;
         do {
-            System.out.println("Please enter a `enter` value (1 to 6)");
+            System.out.println("================Main Menu===============");
+            System.out.println("(1) Add a class to my time table");
+            System.out.println("(2) Delete a class from my time table");
+            System.out.println("(3) View the class at a specific time");
+            System.out.println("(4) View schedule of a specific class");
+            System.out.println("(5) TimeTable corresponding to input date");
+            System.out.println("(6) Exit the Program");
+            System.out.println("================Main Menu===============");
             try {
                 enter = keyboard.nextInt();
-                keyboard.nextLine();
             } catch (InputMismatchException e) {
                 enter = 0;
-                keyboard.next();
+                keyboard.nextLine();
             }
 
             switch (enter) {
@@ -98,7 +100,7 @@ public class HYTimeTableApp {
                     if (!weeksList.contains(day)) {
                         System.out.println("Error : Please enter a valid day");
                         break;
-                    } else if(isWeekend.test(day)) {
+                    } else if (isWeekend.test(day)) {
                         System.out.println("There is no schedule");
                         break;
                     }
@@ -134,8 +136,9 @@ public class HYTimeTableApp {
                     if (!weeksList.contains(day)) {
                         System.out.println("Error : Please enter a valid day");
                         break;
-                    } else if(isWeekend.test(day)) {
+                    } else if (isWeekend.test(day)) {
                         System.out.println("There is no schedule");
+                        break;
                     }
                     System.out.println("Please enter the time of the class");
                     if (keyboard.hasNextInt()) {
@@ -148,11 +151,8 @@ public class HYTimeTableApp {
                     }
 
                     sub = timeTable.getSchedule(day, period);
-                    if (sub == null) {
-                        System.out.println("There is no matching class");
-                    } else {
-                        System.out.println(sub);
-                    }
+                    System.out.println(Objects.requireNonNullElse(sub, "There is no matching class"));
+                    System.out.println(timeTable);
 
                     break;
                 }
