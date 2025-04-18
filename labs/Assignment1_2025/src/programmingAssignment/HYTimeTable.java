@@ -26,8 +26,8 @@ public class HYTimeTable {
         //2. All timetables in hour 12 are fixed to LUNCH. Here isValid field of the Course class should be set to false.
         //3. All timetables in hour 17 are fixed to DINNER. Here isValid field of the Course class should be set to false.
         //4. All other time slots are initialized with ----. Here isValid field of the Course class should be set to true.
-        for (var i = 0; i < 5; i++) {
-            for (var j = 0; j < 11; j++) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 11; j++) {
                 Course k;
                 if (j == 3) {
                     k = new Course(Course.CLASS_LUNCH);
@@ -88,14 +88,14 @@ public class HYTimeTable {
         StringBuilder sb = new StringBuilder("  ");
         //•	Create a method called toString(). This method returns the format for
         // the timetable as a String (SEE DOCUMENTATION).
-        for (var s : DAYS.values()) {
+        for (DAYS s : DAYS.values()) {
             sb.append(String.format("%12s", s.toString()));
         }
         sb.append('\n');
 
-        for (var i = 0; i < 11; i++) {
+        for (int i = 0; i < 11; i++) {
             sb.append(String.format("%2d", i + 9));
-            for (var j = 0; j < 5; j++) {
+            for (int j = 0; j < 5; j++) {
                 sb.append(String.format("%12s", timeTable[i][j].toString()));
             }
             sb.append('\n');
@@ -110,7 +110,7 @@ public class HYTimeTable {
         // This method receives a day of the week as an input and returns
         // the timetable for that day in String format.
         sb.append(day).append('\n');
-        for (var i = 0; i < 11; i++) {
+        for (int i = 0; i < 11; i++) {
             sb.append(timeTable[i][DAYS.valueOf(day).ordinal()].toString()).append('\n');
         }
         return sb.toString();
@@ -154,7 +154,7 @@ public class HYTimeTable {
         // the day (year month day) it wants to know as input and stores the
         // date information in the Calendar class object.
         // And returns an object of the Calendar class.(FOLLOW DOCUMENTATION)
-        var s = keyboard.next().strip();
+        String s = keyboard.next().trim();
         if (s.length() != 8) { // only for YYYYMMDD
             return null;
         }

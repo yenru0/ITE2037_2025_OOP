@@ -7,10 +7,10 @@ public class HYTimeTableApp {
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
         final String[] weeks = {"SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"};
-        final List<String> weeksList = List.of(weeks);
+        final List<String> weeksList = Arrays.asList(weeks);
 
         Predicate<String> isWeekend = (String day) -> {
-            var k = weeksList.indexOf(day);
+            int k = weeksList.indexOf(day);
             return k == 0 || k == 6;
         };
 
@@ -70,13 +70,13 @@ public class HYTimeTableApp {
                     }
 
                     System.out.println("Please enter the name of the class");
-                    name = keyboard.nextLine().strip();
+                    name = keyboard.nextLine().trim();
 
                     System.out.println("Please enter the name of the tutor");
-                    tutorName = keyboard.nextLine().strip();
+                    tutorName = keyboard.nextLine().trim();
 
                     System.out.println("Please enter the name of the room");
-                    roomName = keyboard.nextLine().strip();
+                    roomName = keyboard.nextLine().trim();
 
                     if (timeTable.setSchedule(day, period, name, tutorName, roomName)) {
                         System.out.println("Class successfully added");
@@ -151,7 +151,11 @@ public class HYTimeTableApp {
                     }
 
                     sub = timeTable.getSchedule(day, period);
-                    System.out.println(Objects.requireNonNullElse(sub, "There is no matching class"));
+                    if (sub == null) {
+                        System.out.println("There is no matching class");
+                    } else {
+                        System.out.println(sub);
+                    }
                     System.out.println(timeTable);
 
                     break;
@@ -163,7 +167,7 @@ public class HYTimeTableApp {
                     // information of the subject as shown IN THE DOCUMENT.
                     //•	However if the class is not present print “There is no class” as output
                     System.out.println("Please enter the class name");
-                    name = keyboard.nextLine().strip();
+                    name = keyboard.nextLine().trim();
 
                     System.out.println(timeTable.subjectSchedule(name));
                     System.out.println(timeTable);
@@ -182,7 +186,7 @@ public class HYTimeTableApp {
                         System.out.println("Error : Please enter a valid date(YYYYMMDD)");
                         break;
                     }
-                    var index = cal.get(Calendar.DAY_OF_WEEK) - 1;
+                    int index = cal.get(Calendar.DAY_OF_WEEK) - 1;
                     if (index == 0 || index == 6) {
                         System.out.println("There is no schedule");
                         break;
